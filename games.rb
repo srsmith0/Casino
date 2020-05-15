@@ -1,3 +1,7 @@
+require_relative 'player.rb'
+require_relative 'casino.rb'
+require_relative 'hilo.rb'
+
 class Slots
 
   def initialize
@@ -6,15 +10,17 @@ class Slots
   end
 
   def slot_bet 
-    puts "Enter $5"
+    puts "Place your bet"
     @slot_bet = gets.strip.to_i    
-    if @slot_bet == 5
-      #run program
-      #subtract 5 from wallet
-    else
-      puts "Please enter $5"
-      slot_bet 
-    end
+    puts "You entered #{@slot_bet}\n" #is this right????
+    #show user what they entered
+    # if @slot_bet == 5
+    #   #run program
+    #   #subtract 5 from wallet
+    # else
+    #   puts "Please enter $5"
+    #   slot_bet 
+    # end
   end
   
   def multiplier(s1, s2, s3)
@@ -50,12 +56,6 @@ class Slots
   #   print "Sum is.."
   # end
 end
-#Pull lever
-#Get 3 random numbers.  Compare numbers
-#Pay out
 #ask to play again
 
 a = Slots.new
-
-
-

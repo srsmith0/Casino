@@ -10,6 +10,8 @@
 #ability to move between games
 
 require_relative 'player.rb'
+require_relative 'games.rb'
+require_relative 'hilo.rb'
 
 class Casino 
   #player can go to games via a menu...high/low, slots
