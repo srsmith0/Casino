@@ -1,7 +1,8 @@
-require_relative 'player.rb'
-require_relative 'casino.rb'
-require_relative 'hilo.rb'
+require_relative 'player'
+# require_relative 'casino'
+# require_relative 'hilo'
 
+@wallet = Wallet.new(100)
 class Slots
 
   def initialize
@@ -12,11 +13,11 @@ class Slots
   def slot_bet 
     puts "Place your bet"
     @slot_bet = gets.strip.to_i    
-    puts "You entered #{@slot_bet}\n" #is this right????
-    #show user what they entered
+    puts "You entered $#{@slot_bet}\n" #is this right????
     # if @slot_bet == 5
     #   #run program
     #   #subtract 5 from wallet
+    @wallet.sub(@slot_bet)
     # else
     #   puts "Please enter $5"
     #   slot_bet 
@@ -48,14 +49,15 @@ class Slots
 
   def slot_payout
     @winnings = @slot_bet * multiplier(@s_value1, @s_value2, @s_value3)
+    # a.balance = @winnings + a.balance
     #add winnings to wallet
-    puts @winnings
+    @wallet.add(@winnings)
+    puts wallet.current_balance
   end
 
-  # def show_sum
-  #   print "Sum is.."
-  # end
 end
 #ask to play again
 
 a = Slots.new
+
+

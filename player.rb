@@ -1,6 +1,6 @@
-require_relative 'casino.rb'
-require_relative 'games.rb'
-require_relative 'hilo.rb'
+# require_relative 'casino'
+# require_relative 'slots'
+# require_relative 'hilo'
 
 class Player
   #Start the game.  Player has a name and wallet
@@ -13,19 +13,31 @@ class Player
 end 
 
 class Wallet
-  def initialize
-    @start_balance = 100
+  attr_accessor :money
+
+  def initialize(money)
+    @start_balance = money
+    display
+    start_balance
   end
   def display
     print "Here is your starting budget: #{@start_balance}\n"
   end
-  def balance
+  def start_balance
     @current_balance = @start_balance
   end
-  #create a running total variable
-  #add an addition method to running balance
-  #add a subtraction method to running balance
+#create a running total variable
+  def current_balance
+    puts "Your running total is $#{@current_balance}."
+  end
+#add an addition method to running balance
+  def add(cash)
+    @current_balance = @current_balance + cash
+  end
+#add a subtraction method to running balance
+  def sub(cash)
+    @current_balance = @current_balance - cash
+  end
 end
 
-a = Wallet.new 
-a.balance 
+

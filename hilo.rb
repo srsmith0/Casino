@@ -1,3 +1,3 @@
-require_relative 'player.rb'
-require_relative 'games.rb'
-require_relative 'casino.rb'
+require_relative 'player'
+require_relative 'slots'
+require_relative 'casino'
