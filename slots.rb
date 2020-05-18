@@ -1,63 +1,75 @@
-require_relative 'player'
-# require_relative 'casino'
-# require_relative 'hilo'
-
-@wallet = Wallet.new(100)
 class Slots
+  def initialize(total)
+    @current_total = total 
+  end
 
-  def initialize
+  def slot_game
     slot_bet
-    slot_game
+    slot_value
+    slot_payout
+    add_to_wallet
+    show_current
+    play_again
   end
 
   def slot_bet 
-    puts "Place your bet"
-    @slot_bet = gets.strip.to_i    
-    puts "You entered $#{@slot_bet}\n" #is this right????
-    # if @slot_bet == 5
-    #   #run program
-    #   #subtract 5 from wallet
-    @wallet.sub(@slot_bet)
-    # else
-    #   puts "Please enter $5"
-    #   slot_bet 
-    # end
+    puts "Hello, welcome to the Slot machine. Please place your bet."
+    @slot_bet = gets.strip.to_i
+      if @slot_bet > 0 && @current_total > 0 && (@current_total - @slot_bet) >= 0
+        puts "You entered $#{@slot_bet}"
+        @current_total = @current_total - @slot_bet
+      else
+        puts "You do not have enough money to play"
+        exit
+       end
   end
   
-  def multiplier(s1, s2, s3)
-    if s1==s2 && s2==s3
-      3
-    elsif s1==s2 || s2==s3 || s1==s3
-      2
+  def multiplier(one, two, three)
+    if one == two && two == three
+     3
+    elsif one == two || two == three || one == three
+     2
     else
-      0
+     0
     end
   end
 
   def display_slot
-    puts "Slot result is #{@s_value1}, #{@s_value2}, #{@s_value2} !"
+    puts "Slot result is #{@value1}, #{@value2}, #{@value2}"
   end
-  
-  def slot_game
-    @slot = [1, 2, 3, 4, 5, 6, 7]
-    @s_value1 = @slot.sample
-    @s_value2 = @slot.sample
-    @s_value3 = @slot.sample
+
+  def slot_value
+    @slot = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    @value1 = rand(7)
+    @value2 = rand(7)
+    @value3 = rand(7)
     display_slot
-    slot_payout
   end
 
   def slot_payout
-    @winnings = @slot_bet * multiplier(@s_value1, @s_value2, @s_value3)
-    # a.balance = @winnings + a.balance
-    #add winnings to wallet
-    @wallet.add(@winnings)
-    puts wallet.current_balance
+    @winnings = @slot_bet * multiplier(@value1, @value2, @value3)  ###Seems to be an issue on paying out if 2, 3 are a match for certain numbers
+    puts "You won $#{@winnings}!"
   end
 
+  def show_current
+    puts "You currently have $#{@current_total}."
+  end
+
+  def add_to_wallet
+    @current_total = @current_total + @winnings
+    puts "You currently have $#{@current_total}"
+  end
+
+  def play_again
+   puts "Play again? Y or N to choose another game"
+   @user_choice = gets.to_str.strip
+    if @user_choice == "y"
+      slot_game
+    elsif @user_choice == "n"
+      puts "Good bye"
+    else
+      puts "Invalid input."
+      play_again
+    end
+  end
 end
-#ask to play again
-
-a = Slots.new
-
-
